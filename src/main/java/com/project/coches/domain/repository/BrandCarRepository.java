@@ -1,6 +1,6 @@
 package com.project.coches.domain.repository;
 
-import com.project.coches.domain.pojo.BrandCarPojo;
+import com.project.coches.domain.dto.BrandCarDto;
 import com.project.coches.persistance.entity.BrandCarEntity;
 import com.project.coches.persistance.mapper.IBrandCarMapper;
 import com.project.coches.persistance.repository.IBrandCarCrudRepository;
@@ -31,7 +31,7 @@ public class BrandCarRepository implements IBrandCarRepository{
     * Devuelve un alista con todos las marcas de coche
     * */
     @Override
-    public List<BrandCarPojo> getAll() {
+    public List<BrandCarDto> getAll() {
         //Convertimos la lista de marcaCochesEntity a una lista de marcaCochePojo
         return iBrandCarMapper.toBrandCarListPojo(iBrandCarCrudRepository.findAll());
     }
@@ -40,7 +40,7 @@ public class BrandCarRepository implements IBrandCarRepository{
     *Devuelve una marca de coche dada su Id
     * */
     @Override
-    public Optional<BrandCarPojo> getBrandCar(Integer id) {
+    public Optional<BrandCarDto> getBrandCar(Integer id) {
         return iBrandCarCrudRepository.findById(id)
                 .map(iBrandCarMapper::toBrandCarPojo);
         //brandCarEntity -> iBrandCarMapper.toBrandCarPojo(brandCarEntity) -LAMBDA
@@ -51,7 +51,7 @@ public class BrandCarRepository implements IBrandCarRepository{
      * Guarda una nueva marca de coche
      * */
     @Override
-    public BrandCarPojo save(BrandCarPojo newBrandCar) {
+    public BrandCarDto save(BrandCarDto newBrandCar) {
         //Transformamos a un Entity el Pojo recibido
         BrandCarEntity brandCarEntity = iBrandCarMapper.toBrandCarEntity(newBrandCar);
         //Al guardar , convertimos el Entity a un Pojo

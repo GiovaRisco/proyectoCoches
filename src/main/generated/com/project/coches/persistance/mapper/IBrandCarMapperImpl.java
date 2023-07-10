@@ -1,6 +1,6 @@
 package com.project.coches.persistance.mapper;
 
-import com.project.coches.domain.pojo.BrandCarPojo;
+import com.project.coches.domain.dto.BrandCarDto;
 import com.project.coches.persistance.entity.BrandCarEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,21 +16,21 @@ import org.springframework.stereotype.Component;
 public class IBrandCarMapperImpl implements IBrandCarMapper {
 
     @Override
-    public BrandCarPojo toBrandCarPojo(BrandCarEntity marcaEntity) {
+    public BrandCarDto toBrandCarPojo(BrandCarEntity marcaEntity) {
         if ( marcaEntity == null ) {
             return null;
         }
 
-        BrandCarPojo brandCarPojo = new BrandCarPojo();
+        BrandCarDto brandCarDto = new BrandCarDto();
 
-        brandCarPojo.setId( marcaEntity.getId() );
-        brandCarPojo.setDescription( marcaEntity.getDescription() );
+        brandCarDto.setId( marcaEntity.getId() );
+        brandCarDto.setDescription( marcaEntity.getDescription() );
 
-        return brandCarPojo;
+        return brandCarDto;
     }
 
     @Override
-    public BrandCarEntity toBrandCarEntity(BrandCarPojo marcaPojo) {
+    public BrandCarEntity toBrandCarEntity(BrandCarDto marcaPojo) {
         if ( marcaPojo == null ) {
             return null;
         }
@@ -44,12 +44,12 @@ public class IBrandCarMapperImpl implements IBrandCarMapper {
     }
 
     @Override
-    public List<BrandCarPojo> toBrandCarListPojo(List<BrandCarEntity> marcasCocheEntity) {
+    public List<BrandCarDto> toBrandCarListPojo(List<BrandCarEntity> marcasCocheEntity) {
         if ( marcasCocheEntity == null ) {
             return null;
         }
 
-        List<BrandCarPojo> list = new ArrayList<BrandCarPojo>( marcasCocheEntity.size() );
+        List<BrandCarDto> list = new ArrayList<BrandCarDto>( marcasCocheEntity.size() );
         for ( BrandCarEntity brandCarEntity : marcasCocheEntity ) {
             list.add( toBrandCarPojo( brandCarEntity ) );
         }

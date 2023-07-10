@@ -1,6 +1,6 @@
 package com.project.coches.controller;
 
-import com.project.coches.domain.pojo.BrandCarPojo;
+import com.project.coches.domain.dto.BrandCarDto;
 import com.project.coches.domain.service.IBrandCarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 /*
@@ -28,7 +27,7 @@ public class BrandCarController {
     * Devuelve lista de marcasCoche
     * */
     @GetMapping
-    public ResponseEntity<List<BrandCarPojo>>  getAll(){
+    public ResponseEntity<List<BrandCarDto>>  getAll(){
         return ResponseEntity.ok(iBrandCarService.getAll());
         //return ResponseEntity.status(HttpStatus.OK)
         //      .body(iBrandCarService.getAll()); -- Alternativa
@@ -40,7 +39,7 @@ public class BrandCarController {
     * HttpCode Ok , si la encuentra , HttpCode Not-Found si no es el caso
     * */
     @GetMapping("/{id}")
-    public ResponseEntity<BrandCarPojo> getBrandCar(@PathVariable("id") Integer id){
+    public ResponseEntity<BrandCarDto> getBrandCar(@PathVariable("id") Integer id){
         return  ResponseEntity.of(iBrandCarService.getBrandCar(id));
     }
 
@@ -48,7 +47,7 @@ public class BrandCarController {
     * Crea una nueva marcaCoche
     * */
     @PostMapping
-    public  ResponseEntity<BrandCarPojo> save(@RequestBody BrandCarPojo newBrandCar){
+    public  ResponseEntity<BrandCarDto> save(@RequestBody BrandCarDto newBrandCar){
         try {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(iBrandCarService.save(newBrandCar));
@@ -63,9 +62,9 @@ public class BrandCarController {
     * Actualiza una marcaCoche
     * */
     @PatchMapping
-    public ResponseEntity<BrandCarPojo> update(@RequestBody BrandCarPojo brandCarPojoUpdate){
+    public ResponseEntity<BrandCarDto> update(@RequestBody BrandCarDto brandCarDtoUpdate){
 
-        return  ResponseEntity.of( iBrandCarService.update(brandCarPojoUpdate));
+        return  ResponseEntity.of( iBrandCarService.update(brandCarDtoUpdate));
     }
 
 
