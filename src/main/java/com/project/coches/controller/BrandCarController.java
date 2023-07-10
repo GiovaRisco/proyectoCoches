@@ -24,6 +24,9 @@ public class BrandCarController {
     * */
     private final IBrandCarService iBrandCarService;
 
+    /*
+    * Devuelve lista de marcasCoche
+    * */
     @GetMapping
     public ResponseEntity<List<BrandCarPojo>>  getAll(){
         return ResponseEntity.ok(iBrandCarService.getAll());
@@ -32,11 +35,18 @@ public class BrandCarController {
         //return new ResponseEntity<>(iBrandCarService.getAll(),HttpStatus.OK); Alternatica para crear Response_Entity
     }
 
+    /*
+    * Devuelve una marcaCoche dada su Id
+    * HttpCode Ok , si la encuentra , HttpCode Not-Found si no es el caso
+    * */
     @GetMapping("/{id}")
     public ResponseEntity<BrandCarPojo> getBrandCar(@PathVariable("id") Integer id){
         return  ResponseEntity.of(iBrandCarService.getBrandCar(id));
     }
 
+    /*
+    * Crea una nueva marcaCoche
+    * */
     @PostMapping
     public  ResponseEntity<BrandCarPojo> save(@RequestBody BrandCarPojo newBrandCar){
         try {
@@ -49,4 +59,21 @@ public class BrandCarController {
     }
 
 
+    /*
+    * Actualiza una marcaCoche
+    * */
+    @PatchMapping
+    public ResponseEntity<BrandCarPojo> update(@RequestBody BrandCarPojo brandCarPojoUpdate){
+
+        return  ResponseEntity.of( iBrandCarService.update(brandCarPojoUpdate));
+    }
+
+
+    /*
+    * Elimina una marcaCoche dada su Id
+    * */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable("id")Integer id){
+        return new ResponseEntity<>(this.iBrandCarService.delete(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    }
 }
