@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-10T00:35:52-0500",
+    date = "2023-07-13T22:06:24-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.4.1 (Oracle Corporation)"
 )
 @Component
 public class IBrandCarMapperImpl implements IBrandCarMapper {
 
     @Override
-    public BrandCarDto toBrandCarPojo(BrandCarEntity marcaEntity) {
+    public BrandCarDto toBrandCarDto(BrandCarEntity marcaEntity) {
         if ( marcaEntity == null ) {
             return null;
         }
@@ -44,14 +44,14 @@ public class IBrandCarMapperImpl implements IBrandCarMapper {
     }
 
     @Override
-    public List<BrandCarDto> toBrandCarListPojo(List<BrandCarEntity> marcasCocheEntity) {
+    public List<BrandCarDto> toBrandCarListDto(List<BrandCarEntity> marcasCocheEntity) {
         if ( marcasCocheEntity == null ) {
             return null;
         }
 
         List<BrandCarDto> list = new ArrayList<BrandCarDto>( marcasCocheEntity.size() );
         for ( BrandCarEntity brandCarEntity : marcasCocheEntity ) {
-            list.add( toBrandCarPojo( brandCarEntity ) );
+            list.add( toBrandCarDto( brandCarEntity ) );
         }
 
         return list;

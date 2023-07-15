@@ -1,7 +1,7 @@
 package com.project.coches.controller;
 
 import com.project.coches.domain.dto.BrandCarDto;
-import com.project.coches.domain.service.IBrandCarService;
+import com.project.coches.domain.useCase.IBrandCarUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,20 +15,20 @@ import java.util.List;
 * */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/marcas-coches")
+@RequestMapping("/brands-car")
 public class BrandCarController {
 
     /*
     * Servicio de marca coche
     * */
-    private final IBrandCarService iBrandCarService;
+    private final IBrandCarUseCase iBrandCarUseCase;
 
     /*
     * Devuelve lista de marcasCoche
     * */
     @GetMapping
     public ResponseEntity<List<BrandCarDto>>  getAll(){
-        return ResponseEntity.ok(iBrandCarService.getAll());
+        return ResponseEntity.ok(iBrandCarUseCase.getAll());
         //return ResponseEntity.status(HttpStatus.OK)
         //      .body(iBrandCarService.getAll()); -- Alternativa
         //return new ResponseEntity<>(iBrandCarService.getAll(),HttpStatus.OK); Alternatica para crear Response_Entity
@@ -40,7 +40,7 @@ public class BrandCarController {
     * */
     @GetMapping("/{id}")
     public ResponseEntity<BrandCarDto> getBrandCar(@PathVariable("id") Integer id){
-        return  ResponseEntity.of(iBrandCarService.getBrandCar(id));
+        return  ResponseEntity.of(iBrandCarUseCase.getBrandCar(id));
     }
 
     /*
@@ -50,7 +50,7 @@ public class BrandCarController {
     public  ResponseEntity<BrandCarDto> save(@RequestBody BrandCarDto newBrandCar){
         try {
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(iBrandCarService.save(newBrandCar));
+                    .body(iBrandCarUseCase.save(newBrandCar));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .build();
@@ -64,7 +64,7 @@ public class BrandCarController {
     @PatchMapping
     public ResponseEntity<BrandCarDto> update(@RequestBody BrandCarDto brandCarDtoUpdate){
 
-        return  ResponseEntity.of( iBrandCarService.update(brandCarDtoUpdate));
+        return  ResponseEntity.of( iBrandCarUseCase.update(brandCarDtoUpdate));
     }
 
 
@@ -73,6 +73,6 @@ public class BrandCarController {
     * */
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable("id")Integer id){
-        return new ResponseEntity<>(this.iBrandCarService.delete(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(this.iBrandCarUseCase.delete(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 }

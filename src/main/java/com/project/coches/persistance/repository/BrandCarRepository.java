@@ -1,9 +1,10 @@
-package com.project.coches.domain.repository;
+package com.project.coches.persistance.repository;
 
 import com.project.coches.domain.dto.BrandCarDto;
+import com.project.coches.domain.repository.IBrandCarRepository;
+import com.project.coches.persistance.crud.IBrandCarCrudRepository;
 import com.project.coches.persistance.entity.BrandCarEntity;
 import com.project.coches.persistance.mapper.IBrandCarMapper;
-import com.project.coches.persistance.repository.IBrandCarCrudRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +15,7 @@ import java.util.Optional;
 /*Repositorio de marcacoche*/
 @RequiredArgsConstructor /*Genera el constructor solo  para los objetos FINAL en este caso : IBrandCarCrudRepository , IBrandCarMapper*/
 @Repository
-public class BrandCarRepository implements IBrandCarRepository{
+public class BrandCarRepository implements IBrandCarRepository {
 
     /*
     *Crud de marca coche
@@ -33,7 +34,7 @@ public class BrandCarRepository implements IBrandCarRepository{
     @Override
     public List<BrandCarDto> getAll() {
         //Convertimos la lista de marcaCochesEntity a una lista de marcaCochePojo
-        return iBrandCarMapper.toBrandCarListPojo(iBrandCarCrudRepository.findAll());
+        return iBrandCarMapper.toBrandCarListDto(iBrandCarCrudRepository.findAll());
     }
 
     /*
@@ -42,7 +43,7 @@ public class BrandCarRepository implements IBrandCarRepository{
     @Override
     public Optional<BrandCarDto> getBrandCar(Integer id) {
         return iBrandCarCrudRepository.findById(id)
-                .map(iBrandCarMapper::toBrandCarPojo);
+                .map(iBrandCarMapper::toBrandCarDto);
         //brandCarEntity -> iBrandCarMapper.toBrandCarPojo(brandCarEntity) -LAMBDA
         //iBrandCarMapper::toBrandCarPojo Metodo por Referencia
     }
@@ -55,7 +56,7 @@ public class BrandCarRepository implements IBrandCarRepository{
         //Transformamos a un Entity el Pojo recibido
         BrandCarEntity brandCarEntity = iBrandCarMapper.toBrandCarEntity(newBrandCar);
         //Al guardar , convertimos el Entity a un Pojo
-        return iBrandCarMapper.toBrandCarPojo(iBrandCarCrudRepository.save(brandCarEntity));
+        return iBrandCarMapper.toBrandCarDto(iBrandCarCrudRepository.save(brandCarEntity));
     }
 
     /*
