@@ -17,4 +17,18 @@ public class CustomerDto {
     private Integer active;
 
     private String password;
+
+    private String rol;
+
+    @Override
+    public String toString() {
+        return "CustomerDto{" +
+                "cardId='" + cardId + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", numberCellphone=" + numberCellphone +
+                ", active=" + active +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

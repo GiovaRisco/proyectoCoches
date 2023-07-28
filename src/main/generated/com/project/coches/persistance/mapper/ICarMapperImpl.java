@@ -1,6 +1,7 @@
 package com.project.coches.persistance.mapper;
 
 import com.project.coches.domain.dto.CarDto;
+import com.project.coches.persistance.entity.BrandCarEntity;
 import com.project.coches.persistance.entity.CarEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-13T22:06:24-0500",
+    date = "2023-07-27T16:01:57-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.4.1 (Oracle Corporation)"
 )
 @Component
@@ -23,6 +24,8 @@ public class ICarMapperImpl implements ICarMapper {
 
         CarDto carDto = new CarDto();
 
+        carDto.setBrandCarString( carEntityBrandCarEntityDescription( carEntity ) );
+        carDto.setStock( carEntity.getStock() );
         carDto.setCodeCar( carEntity.getCodeCar() );
         carDto.setBrandCar( carEntity.getBrandCar() );
         carDto.setReference( carEntity.getReference() );
@@ -51,6 +54,7 @@ public class ICarMapperImpl implements ICarMapper {
 
         CarEntity carEntity = new CarEntity();
 
+        carEntity.setStock( carDto.getStock() );
         carEntity.setCodeCar( carDto.getCodeCar() );
         carEntity.setBrandCar( carDto.getBrandCar() );
         carEntity.setReference( carDto.getReference() );
@@ -83,5 +87,20 @@ public class ICarMapperImpl implements ICarMapper {
         }
 
         return list;
+    }
+
+    private String carEntityBrandCarEntityDescription(CarEntity carEntity) {
+        if ( carEntity == null ) {
+            return null;
+        }
+        BrandCarEntity brandCarEntity = carEntity.getBrandCarEntity();
+        if ( brandCarEntity == null ) {
+            return null;
+        }
+        String description = brandCarEntity.getDescription();
+        if ( description == null ) {
+            return null;
+        }
+        return description;
     }
 }

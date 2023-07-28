@@ -45,7 +45,14 @@ public class CarController {
 
     }
 
-    @DeleteMapping("/{carId}")
+    @PatchMapping
+    public ResponseEntity<CarDto> update(@RequestBody CarDto carDtoUpdate){
+        return  ResponseEntity.ok( iCarUseCase.save(carDtoUpdate));
+
+    }
+
+
+        @DeleteMapping("/{carId}")
     public ResponseEntity<Boolean> delete(@PathVariable("carId")Integer carId){
         return new ResponseEntity<>(this.iCarUseCase.delete(carId) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }

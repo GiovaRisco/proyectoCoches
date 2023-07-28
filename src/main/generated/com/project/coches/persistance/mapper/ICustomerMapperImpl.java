@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-10T11:06:54-0500",
+    date = "2023-07-25T23:41:54-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.4.1 (Oracle Corporation)"
 )
 @Component
@@ -29,6 +29,7 @@ public class ICustomerMapperImpl implements ICustomerMapper {
         customerDto.setNumberCellphone( customerEntity.getNumberCellphone() );
         customerDto.setActive( customerEntity.getActive() );
         customerDto.setPassword( customerEntity.getPassword() );
+        customerDto.setRol( customerEntity.getRol() );
 
         return customerDto;
     }
@@ -47,6 +48,7 @@ public class ICustomerMapperImpl implements ICustomerMapper {
         customerEntity.setNumberCellphone( customerDto.getNumberCellphone() );
         customerEntity.setActive( customerDto.getActive() );
         customerEntity.setPassword( customerDto.getPassword() );
+        customerEntity.setRol( customerDto.getRol() );
 
         return customerEntity;
     }

@@ -3,7 +3,6 @@ package com.project.coches.persistance.repository;
 import com.project.coches.domain.dto.CarDto;
 import com.project.coches.domain.repository.ICarRepository;
 import com.project.coches.persistance.crud.ICarCrudRepository;
-import com.project.coches.persistance.entity.CarEntity;
 import com.project.coches.persistance.mapper.ICarMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -41,9 +40,10 @@ public class CarRepository  implements  ICarRepository{
 
     @Override
     public CarDto save(CarDto newCar) {
-        CarEntity carEntity = iCarMapper.toCarEntity(newCar);
-        iCarCrudRepository.save(carEntity);
-        return iCarMapper.toCarDto(carEntity);
+        return iCarMapper
+                .toCarDto(iCarCrudRepository
+                        .save(iCarMapper
+                                .toCarEntity(newCar)));
     }
 
     @Override

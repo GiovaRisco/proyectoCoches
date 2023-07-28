@@ -9,9 +9,12 @@ import lombok.Setter;
  @Getter @Setter
 public class CarDto {
 
+
     private Integer codeCar;
 
     private Integer brandCar;
+
+    private String brandCarString;
 
     private String reference;
 
@@ -40,6 +43,8 @@ public class CarDto {
     private String category;
 
     private String imagePath;
+
+    private Integer stock;
 
 
 }
